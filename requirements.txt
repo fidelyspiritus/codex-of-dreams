@@ -1,0 +1,4 @@
+aiogram>=3.10.0
+pydantic>=2.6
+PyYAML>=6.0
+python-dotenv>=1.0

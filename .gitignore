@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+
+# Virtual environment
+.venv/
+venv/
+
+# Logs & cache
+*.log
+*.sqlite*
+*.db
+*.tmp
+tmp/
+pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+
+# Editors & IDEs
+.vscode/
+.idea/
+
+# Project-specific
+.env
+data
