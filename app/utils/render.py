@@ -44,3 +44,21 @@ def event_card(ev) -> str:
 
 def rules_block(title: str, rules_text: str) -> str:
     return f"<b>{esc(title)} — Rules</b>\n\n{esc(rules_text or '—')}"
+
+# ----- skills -----
+def skill_card(s) -> str:
+    """
+    s — объект Skill из skills_repo
+    """
+    parts = [
+        f"<b>{esc(s.name)}</b>",
+        f"Type: {esc(s.type)}" + (f"   Season: {esc(s.season)}" if s.season else ""),
+        "",
+        "<b>• Effect:</b>",
+        esc(s.effect or "—"),
+    ]
+    if s.probability:
+        parts += ["", f"Probability: {esc(s.probability)}"]
+    if s.frequency:
+        parts += ["", f"Frequency: {esc(s.frequency)}"]
+    return "\n".join(parts)

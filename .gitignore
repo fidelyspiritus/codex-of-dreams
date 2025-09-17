@@ -26,4 +26,4 @@ pytest_cache/
 
 # Project-specific
 .env
-data
+/data/
