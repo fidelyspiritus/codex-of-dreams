@@ -28,9 +28,11 @@ def main_menu_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
             [KeyboardButton(text="/events"), KeyboardButton(text="/skills")],
+            [KeyboardButton(text="/heroes"), KeyboardButton(text="/help")],  # добавили
         ],
         resize_keyboard=True,
     )
+
 
 def quick_links_inline() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(
