@@ -27,11 +27,14 @@ HELP_TEXT = (
 def main_menu_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="/events"), KeyboardButton(text="/skills")],
-            [KeyboardButton(text="/heroes"), KeyboardButton(text="/help")],  # добавили
+            [KeyboardButton(text="/events"),       KeyboardButton(text="/skills")],
+            [KeyboardButton(text="/heroes"),       KeyboardButton(text="/kvk3")],
+            [KeyboardButton(text="/mount_skills"), KeyboardButton(text="/equipment")],
+            [KeyboardButton(text="/jewels"),       KeyboardButton(text="/help")],
         ],
         resize_keyboard=True,
     )
+
 
 
 def quick_links_inline() -> InlineKeyboardMarkup:

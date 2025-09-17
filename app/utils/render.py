@@ -1,6 +1,8 @@
 import html
 from typing import Iterable
 import textwrap
+import json
+from pathlib import Path
 
 def esc(s: str | None) -> str:
     return html.escape(s or "")
@@ -220,3 +222,13 @@ def hero_card(h) -> str:
         parts += ["<b>Skills</b>", "\n".join(skill_lines)]
 
     return _join_nonempty_lines(parts)
+
+def load_json(file_path: Path):
+    """Load JSON data from file, return list or empty list."""
+    if not file_path.exists():
+        return []
+    with open(file_path, "r", encoding="utf-8") as f:
+        try:
+            return json.load(f)
+        except json.JSONDecodeError:
+            return []
