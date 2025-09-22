@@ -3,9 +3,18 @@ import logging
 from aiogram import types
 from aiogram.types import BotCommand
 
-from app.bot import build_bot, build_dispatcher
-from app.config import settings
-from app.handlers import base, events, skills, heroes, kvk3, mount_skills, equipment, errors, jewels
+from app.core.bot import build_bot, build_dispatcher
+from app.core.config import settings
+from app.features.errors import errors
+from app.features.events import router as event_router
+from app.features.heroes import router as heroes_router
+from app.features.skills import router as skills_router
+from app.features.mount_skills import router as mount_skills_router
+from app.features.equipment import router as equipment_router
+from app.features.jewels import router as jewels_router
+from app.features.kvk import router as kvk_router
+from app.features.base import base
+from app.features.admin_tools import router as admin_tools_router  # <- новый импорт
 
 
 async def set_commands_all(bot):
@@ -40,13 +49,18 @@ async def main():
 
     # Подключаем все роутеры
     dp.include_router(base.router)
-    dp.include_router(events.router)
-    dp.include_router(skills.router)
-    dp.include_router(heroes.router)
-    dp.include_router(kvk3.router)
-    dp.include_router(mount_skills.router) 
-    dp.include_router(equipment.router)
-    dp.include_router(jewels.router) 
+    dp.include_router(event_router.router)
+    dp.include_router(heroes_router.router)
+    dp.include_router(skills_router.router)
+    dp.include_router(mount_skills_router.router)
+    dp.include_router(equipment_router.router) 
+    dp.include_router(jewels_router.router)
+    dp.include_router(kvk_router.router) 
+ 
+     # ← только когда флаг включён
+    if settings.ENABLE_ADMIN_TOOLS:
+        dp.include_router(admin_tools_router.router)
+
     dp.include_router(errors.router)
 
     # Команды и стартовая инфа

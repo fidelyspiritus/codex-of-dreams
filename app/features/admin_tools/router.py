@@ -107,3 +107,111 @@ async def heroes_check(m: Message):
     if issues:
         return await m.answer(_list_err("Heroes issues", issues))
     return await m.answer("✅ Heroes look good")
+
+# ---------- /events_check ----------
+from json import loads
+
+class EV_Time(BaseModel):
+    duration: str | None = None
+    extra_time_text: str | None = None
+
+class EV_Rules(BaseModel):
+    has_rules: bool | None = None
+    rules_text: str | None = None
+
+class EV_Entry(BaseModel):
+    # минимально необходимые поля
+    id: str | None = None
+    name: str
+
+    description: str | None = None
+    season: str | None = None
+
+    # могут приходить в виде списка или строки — тут не нормализуем,
+    # только проверяем «что-то одно есть и тип корректный»
+    rewards: list[str] | None = None
+    rewards_text: str | None = None
+
+    tips: list[str] | None = None
+    tips_text: str | None = None
+
+    bonus: str | None = None
+    time: EV_Time | None = None
+    rules: EV_Rules | None = None
+
+@router.message(Command("events_check"))
+async def events_check(m: Message):
+    if not is_admin(m.from_user.id if m.from_user else None):
+        return await m.answer("🚫 Admins only.")
+
+    path = Path("data") / "events.json"
+    if not path.exists():
+        return await m.answer("❌ data/events.json: file missing")
+
+    try:
+        raw = loads(path.read_text(encoding="utf-8"))
+    except Exception as e:
+        return await m.answer(f"❌ JSON parse error: {e}")
+
+    # поддерживаем и массив, и объект с ключом "events"
+    if isinstance(raw, dict) and "events" in raw:
+        arr = raw["events"]
+    else:
+        arr = raw
+
+    if not isinstance(arr, list):
+        return await m.answer("❌ events.json must be an array or an object with key 'events' (array)")
+
+    issues: list[str] = []
+    seen_ids: set[str] = set()
+
+    for i, item in enumerate(arr):
+        # базовая валидация pydantic
+        try:
+            ev = EV_Entry.model_validate(item)
+        except ValidationError as ve:
+            for e in ve.errors():
+                loc = ".".join(str(x) for x in e["loc"])
+                issues.append(f"[{i}] {loc} -> {e['msg']}")
+            continue
+
+        # id/name
+        name = (ev.name or "").strip()
+        if not name:
+            issues.append(f"[{i}] empty 'name'")
+        ev_id = (ev.id or "").strip()
+        # id может отсутствовать — ок; но если есть, проверим на дубликаты
+        if ev_id:
+            if ev_id in seen_ids:
+                issues.append(f"[{i}] duplicate id: {ev_id}")
+            seen_ids.add(ev_id)
+
+        # rewards/tips: допустим либо список строк, либо текст; оба — не ошибка, но предупреждение
+        if ev.rewards is not None and not isinstance(ev.rewards, list):
+            issues.append(f"[{i}] rewards must be a list of strings")
+        if ev.tips is not None and not isinstance(ev.tips, list):
+            issues.append(f"[{i}] tips must be a list of strings")
+
+        # rules согласованность
+        has_rules = (ev.rules.has_rules if ev.rules else None)
+        rules_text = (ev.rules.rules_text if ev.rules else None)
+        if has_rules is True and not (rules_text and rules_text.strip()):
+            issues.append(f"[{i}] has_rules=true but rules_text is empty/missing")
+        if has_rules is False and rules_text and rules_text.strip():
+            issues.append(f"[{i}] has_rules=false but rules_text is provided")
+
+        # time блок — просто проверим типы полей
+        if ev.time is not None and not isinstance(ev.time, EV_Time):
+            issues.append(f"[{i}] time must be an object with 'duration'/'extra_time_text'")
+
+        # bonus/duration — не обязательны, но если заданы — должны быть строками
+        if ev.bonus is not None and not isinstance(ev.bonus, str):
+            issues.append(f"[{i}] bonus must be a string")
+
+    if issues:
+        head = "❌ Events issues:\n"
+        body = "\n".join(f"• {e}" for e in issues[:100])
+        tail = "\n… (truncated)" if len(issues) > 100 else ""
+        return await m.answer(head + body + tail)
+
+    return await m.answer("✅ Events look good")

@@ -6,7 +6,7 @@ from aiogram.filters import Command
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, FSInputFile
 
 from . import repo
-from app.common.render import hero_header, hero_card, clamp_for_caption
+from app.common.render import render_hero_header, render_hero, clamp_for_caption
 
 router = Router()
 PER_PAGE = 10
@@ -14,6 +14,7 @@ PER_PAGE = 10
 
 def _pairs_all() -> List[Tuple[str, str]]:
     return [(h.name, h.slug) for h in repo.list_heroes()]
+
 
 def _kb_heroes(pairs: List[Tuple[str, str]], page: int = 0) -> InlineKeyboardMarkup:
     start = page * PER_PAGE
@@ -29,9 +30,10 @@ def _kb_heroes(pairs: List[Tuple[str, str]], page: int = 0) -> InlineKeyboardMar
         rows.append(nav)
     return InlineKeyboardMarkup(inline_keyboard=rows)
 
+
 async def _send_hero(message: types.Message, h) -> None:
-    header = clamp_for_caption(hero_header(h))
-    full = hero_card(h)
+    header = clamp_for_caption(render_hero_header(h))
+    full = render_hero(h)
     img = (h.image or "").strip()
     if img:
         p = Path(img)
@@ -47,6 +49,7 @@ async def _send_hero(message: types.Message, h) -> None:
             return
     await message.answer(full)
 
+
 @router.message(Command("heroes"))
 async def cmd_heroes(m: types.Message):
     parts = m.text.split(maxsplit=1)
@@ -55,12 +58,14 @@ async def cmd_heroes(m: types.Message):
         if not pairs:
             return await m.answer("No heroes yet.")
         return await m.answer("Select a hero:", reply_markup=_kb_heroes(pairs, page=0))
+
     q = parts[1].strip()
     hits = repo.search(q)
     if not hits:
         return await m.answer("No matches found.")
     pairs = [(h.name, h.slug) for h in hits][:30]
     await m.answer(f"Found {len(hits)} match(es). Select:", reply_markup=_kb_heroes(pairs, page=0))
+
 
 @router.callback_query(F.data.startswith("hr:list:"))
 async def cb_list(q: types.CallbackQuery):
@@ -71,6 +76,7 @@ async def cb_list(q: types.CallbackQuery):
     pairs = _pairs_all()
     await q.message.edit_reply_markup(reply_markup=_kb_heroes(pairs, page=page))
     await q.answer()
+
 
 @router.callback_query(F.data.startswith("hr:view:"))
 async def cb_view(q: types.CallbackQuery):

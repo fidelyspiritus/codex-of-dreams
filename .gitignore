@@ -27,3 +27,7 @@ pytest_cache/
 # Project-specific
 .env
 /data/
+/tools/
+/app/features/jewels
+/app/features/equipment
+/app/features/kvk

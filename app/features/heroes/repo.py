@@ -5,9 +5,11 @@ from pydantic import BaseModel, Field
 from pathlib import Path
 import re
 
-from app.common.storage import load_json_with_fallback  
+from app.core.config import settings
+from app.common.storage import load_json_with_fallback  # как в событиях
 
-HEROES_PATHS = ("data/heroes.json", "./heroes.json")
+# Основной путь -> <DATA_DIR>/heroes.json; запасной -> ./heroes.json
+DATA_DIR = Path(getattr(settings, "HEROES_DIR", Path(settings.DATA_DIR) / "heroes"))
 
 
 class Talent(BaseModel):
@@ -23,7 +25,7 @@ class SkillAwakening(BaseModel):
 
 class HeroSkill(BaseModel):
     name: str
-    type: str | None = None          # Active / Passive / Command / Counterattack, etc.
+    type: str | None = None
     rage: int | None = None
     level: int | None = None
     probability: str | None = None
@@ -38,7 +40,7 @@ class Hero(BaseModel):
     specialty: List[str] = Field(default_factory=list)
     talents: List[Talent] = Field(default_factory=list)
     skills: List[HeroSkill] = Field(default_factory=list)
-    image: str | None = None   # optional explicit image path or URL
+    image: str | None = None  # относительный путь в data/images или URL
 
 
 _cache: List[Hero] | None = None
@@ -51,6 +53,7 @@ def _slugify(name: str) -> str:
 
 
 def _as_list(raw: Any) -> List[dict]:
+    # Поддерживаем оба формата: список героев или {"heroes": [...]}
     if isinstance(raw, list):
         return raw
     if isinstance(raw, dict) and isinstance(raw.get("heroes"), list):
@@ -59,12 +62,13 @@ def _as_list(raw: Any) -> List[dict]:
 
 
 def _with_image_guess(h: dict) -> dict:
-    """If no image given, try data/images/<slug>.png|.jpg|.jpeg|.webp."""
+    """Если image не задан, ищем data/images/<slug>.(png|jpg|jpeg|webp)."""
     if h.get("image"):
         return h
     slug = h.get("slug") or _slugify(h.get("name", ""))
+    images_dir = Path(settings.DATA_DIR) / "images"
     for ext in ("png", "jpg", "jpeg", "webp"):
-        p = Path("data/images") / f"{slug}.{ext}"
+        p = images_dir / f"{slug}.{ext}"
         if p.exists():
             h["image"] = str(p)
             break
@@ -74,14 +78,14 @@ def _with_image_guess(h: dict) -> dict:
 def _load() -> List[Hero]:
     global _cache
     if _cache is None:
-        raw = load_json_with_fallback(*HEROES_PATHS)
+        raw = load_json_with_fallback(*DATA_DIR)
         rows = _as_list(raw)
         normed: List[Hero] = []
         for d in rows:
             d = dict(d)
             d.setdefault("slug", _slugify(d.get("name", "")))
             d = _with_image_guess(d)
-            normed.append(Hero(**d))  # pydantic приведёт вложенные dict → модели
+            normed.append(Hero(**d))
         _cache = normed
     return _cache
 
