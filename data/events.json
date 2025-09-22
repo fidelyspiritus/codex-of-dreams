@@ -1,0 +1,119 @@
+{
+  "events": [
+    {
+      "id": "emote-matching",
+      "name": "Emote Matching",
+      "category": "Mini-game",
+      "cycle": "",
+      "description": "Play the matching game to earn rewards. Choose emotes and complete the board.",
+      "rules": [],
+      "source": [],
+      "rewards": {
+        "name": "Choice Chest",
+        "notes": "You can choose what’s inside."
+      },
+      "bonus": {
+        "type": "None"
+      },
+      "tips": [
+        "If you are not going for ranking, better to play 6–7 games x1 each time. This way you can get a free chest and extra coins for achievements. 11 coins minus what you spend."
+      ],
+      "tasks": [],
+      "time":  {
+        "duration": "4d",
+        "window": ""
+      },
+      "updated_at": "2025-09-14T00:00:00Z"
+    },
+    {
+      "id": "blessed-land",
+      "name": "Blessed Land",
+      "category": "global",
+      "cycle": "",
+      "description": "During the event period, players can obtain Blessing Chests of random rarities by performing specified in-game actions. All chests go directly to inventory.",
+      "rules": [
+        "During the event, all members of the corresponding Kingdom will enjoy the benefits of Blessed Land.",
+        "During the event, players can carry out Act of Blessing for a chance to get a Blessing Chest in their inventory.",
+        "Blessing Chests have a range of rarities; higher rarities are harder to obtain but offer more generous rewards."
+      ],
+      "source": [
+        "Killing Niflungs/Niflung Leaders",
+        "Gathering resources on the map",
+        "Capturing/Honing Mounts",
+        "Increasing Mount Elemental Experience",
+        "Consuming Yggdrasil Dew",
+        "Consuming Gems",
+        "Consuming Recast Blades / Enriching Stones",
+        "Purchasing Gems",
+        "Consuming Speedups",
+        "Building any rare or higher equipment",
+        "Upgrading city buildings / research / training Might",
+        "Upgrading skills",
+        "Hunting monsters",
+        "Performing summons at the Hall of Valor",
+        "Consuming non-generic Hero Shards of any Grade",
+        "Completing Worker Commissions"
+      ],
+      "rewards": [
+        "Rare Blessing Chest",
+        "Epic Blessing Chest",
+        "Legendary Blessing Chest"
+      ],
+      "bonus": {
+        "type": "Monster materials conversion success rate",
+        "value": "+2.5%",
+        "scope": "Effective during the event",
+        "notes": "Bonus type may vary per event instance"
+      },
+      "tips": [],
+      "tasks": [],
+      "time": {
+        "duration": "4d",
+        "window": ""
+      },
+      "sources_links": [],
+      "updated_at": "2025-09-13T22:19:21.460148+00:00"
+    },
+    {
+      "id": "serpent-spirit-potion",
+      "name": "Serpent Spirit Potion",
+      "category": "Mini-game",
+      "cycle": "",
+      "description": "Submit potions to Lindy using [Potion Manual]. Place correct colors to clear stages and earn [Magic Crystal Dust].",
+      "rules": [
+        "Use the [Potion Manual] to submit potions to Lindy. Each position must be filled with a potion of the specified color. You may tap on the potion to undo your action at any time before you place the final potion. After all potions are placed, Lindy will assess whether the color of the potion in each position is correct.",
+        "Potions with incorrect colors will return to their original positions, and you will need to spend [Potion Manuals] to place them again. When all potions are correctly placed, you will receive the Stage Clear Reward [Magic Crystal Dust] from Lindy.",
+        "Magic Crystal Dust can be used to purchase items from Lindy on the left side of the interface. You can tap the Switch button to find your desired item type.",
+        "If you don’t find your desired item, you can use the Refresh button to change the selection. Completing a specified number of stages will grant additional refresh attempts.",
+        "Potion Manuals and Magic Crystal Dust will not be recycled after the current event ends, and can be used in subsequent events."
+      ],
+      "source": [
+        "Consuming Gems",
+        "Consuming Speedups",
+        "Killing Niflung Leaders",
+        "Killing Niflungs",
+        "Gathering resources"
+      ],
+      "rewards": [
+        {
+          "name": "Magic Crystal Dust",
+          "notes": "Stage Clear Reward currency"
+        },
+        {
+          "name": "Ranking Rewards",
+          "notes": "Top 300 Chiefs who clear Stage 5-0+ receive rewards via mail after event ends"
+        }
+      ],
+      "bonus": {
+        "type": "None"
+      },
+      "tips": [],
+      "tasks": [],
+      "time": {
+        "duration": "3d",
+        "window": ""
+      },
+      "updated_at": "2025-09-14T00:25:59.619456+00:00"
+    }
+  ]
+}

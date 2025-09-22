@@ -1,0 +1,113 @@
+{
+  "mount_type": "spears",
+  "_defaults": { "level": 10, "star_level": 5 },
+  "slot1": [
+    {
+      "id": "ragebeast_soul",
+      "name": "Ragebeast Soul",
+      "type": "Counterattack",
+      "description": "Deployed Troop's Counterattack Skill Critical Rate increases by 2 %. When deployed Troop receives Active Skill Damage, there is a 100 % chance for deployed Troop to recover 105 Rage. Triggers up to 2 times every 8s.",
+      "image": "spears/ragebeast_soul.png"
+    },
+    {
+      "id": "shatterbone_bite",
+      "name": "Shatterbone Bite",
+      "type": "Counterattack",
+      "description": "Deployed Troop's Counterattack Skill Critical Rate increases by 2 %. When deployed Troop receives a basic attack, there is a 15 % chance to increase deployed Troop's DMG by 12.5 % for 2s. Triggers up to 1 time every 4s.",
+      "image": "spears/shatterbone_bite.png"
+    },
+    {
+      "id": "impenetrable_scales",
+      "name": "Impenetrable Scales",
+      "type": "Counterattack",
+      "description": "Deployed Troop's Counterattack Skill Critical Rate increases by 2 %. When deployed Troop receives a basic attack, there is a 15 % chance to decrease deployed Troop's damage received by 12.5 % for 2s. Triggers up to 1 time every 4s.",
+      "image": "spears/impenetrable_scales.png"
+    },
+    {
+      "id": "corrosive_claws",
+      "name": "Corrosive Claws",
+      "type": "Counterattack",
+      "description": "Deployed Troop's Counterattack Skill Critical Rate increases by 2 %. When deployed Troop receives Active Skill Damage, there is a 100 % chance to increase deployed Troop's DMG by 10.5 % for 2s. Triggers up to 2 times every 8s.",
+      "image": "spears/corrosive_claws.png"
+    },
+    {
+      "id": "purple_gold_scales",
+      "name": "Purple-Gold Scales",
+      "type": "Counterattack",
+      "description": "Deployed Troop's Counterattack Skill Critical Rate increases by 2 %. When deployed Troop receives Active Skill Damage, there is a 100 % chance to decrease deployed Troop's damage received by 10.5 % for 2s. Triggers up to 2 times every 8s.",
+      "image": "spears/purple_gold_scales.png"
+    },
+    {
+      "id": "hoof_strike",
+      "name": "Hoof Strike",
+      "type": "Counterattack",
+      "description": "Deployed Troop's Counterattack Skill Critical Rate increases by 2 %. When deployed Troop receives Active Skill Damage, there is a 100 % chance to increase deployed Troop's Counterattack damage by 125 % for 2s. Triggers up to 2 times every 8s.",
+      "image": "spears/hoof_strike.png"
+    },
+    {
+      "id": "power_swipe",
+      "name": "Power Swipe",
+      "type": "Counterattack",
+      "description": "Deployed Troop's Counterattack Skill Critical Rate increases by 2 %. When deployed Troop receives Active Skill Damage, there is a 100 % chance to deal direct damage (Damage Factor 500) 1 time to target. Triggers up to 2 times every 8s.",
+      "image": "spears/power_swipe.png"
+    },
+    {
+      "id": "retaliation_fangs",
+      "name": "Retaliation Fangs",
+      "type": "Counterattack",
+      "description": "Deployed Troop's Counterattack Skill Critical Rate increases by 2 %. When deployed Troop receives a basic attack, there is a 15 % chance to increase deployed Troop's Counterattack damage by 150 % for 2s. Triggers up to 1 time every 4s.",
+      "image": "spears/retaliation_fangs.png"
+    },
+    {
+      "id": "beastly_rage",
+      "name": "Beastly Rage",
+      "type": "Counterattack",
+      "description": "Deployed Troop's Counterattack Skill Critical Rate increases by 2 %. When deployed Troop receives a basic attack, there is a 15 % chance for deployed Troop to recover 125 Rage. Triggers up to 1 time every 4s.",
+      "image": "spears/beastly_rage.png"
+    },
+    {
+      "id": "spiritual_blessing",
+      "name": "Spiritual Blessing",
+      "type": "Counterattack",
+      "description": "Deployed Troop's Counterattack Skill Critical Rate increases by 2 %. When deployed Troop receives a basic attack, there is a 15 % chance to increase deployed Troop's healing by 40 % for 2s. Triggers up to 1 time every 4s.",
+      "image": "spears/spiritual_blessing.png"
+    },
+    {
+      "id": "healing_leaf",
+      "name": "Healing Leaf",
+      "type": "Counterattack",
+      "description": "Deployed Troop's Counterattack Skill Critical Rate increases by 2 %. When deployed Troop receives Active Skill Damage, there is a 100 % chance to increase deployed Troop's healing by 32.5 % for 2s. Triggers up to 2 times every 8s.",
+      "image": "spears/healing_leaf.png"
+    },
+    {
+      "id": "pincer_strike",
+      "name": "Pincer Strike",
+      "type": "Counterattack",
+      "description": "Deployed Troop's Counterattack Skill Critical Rate increases by 2 %. When deployed Troop receives a basic attack, there is a 15 % chance to deal direct damage (Damage Factor 650) 1 time to target. Triggers up to 1 time every 4s.",
+      "image": "spears/pincer_strike.png"
+    }
+  ],
+  "slot2": [
+    {
+      "id": "steel_scale",
+      "name": "Steel Scale",
+      "type": "Counterattack",
+      "description": "Deployed Troop's Counterattack Skill Critical Rate increases by 3 %. When deployed Troop receives a basic attack, there is a 15 % chance to deal direct damage (Damage Factor 825) 1 time to target. If deployed Troop has less units than target, deployed Troop gains 1 shield (Shield Factor 550) for 2s. Triggers up to 1 time every 4s.",
+      "image": "spears/steel_scale.png"
+    },
+    {
+      "id": "golden_feather",
+      "name": "Golden Feather",
+      "type": "Counterattack",
+      "description": "Deployed Troop's Counterattack Skill Critical Rate increases by 3 %. When deployed Troop receives a basic attack, there is a 15 % chance to deal direct damage (Damage Factor 825) 1 time to target. If deployed Troop has less units than target, deployed Troop receives healing (Heal Factor 600) 1 time. Triggers up to 1 time every 4s.",
+      "image": "spears/golden_feather.png"
+    },
+    {
+      "id": "razor_armor",
+      "name": "Razor Armor",
+      "type": "Counterattack",
+      "description": "Deployed Troop's Counterattack Skill Critical Rate increases by 3 %. When deployed Troop receives a basic attack, there is a 15 % chance to deal direct damage (Damage Factor 400) 1 time to up to 3 targets within a circular area around self. If deployed Troop's units are less than 50 %, deployed Troop gains a shield (Shield Factor 300) for 2s. Triggers up to 1 time every 4s.",
+      "image": "spears/razor_armor.png"
+    }
+  ]
+}

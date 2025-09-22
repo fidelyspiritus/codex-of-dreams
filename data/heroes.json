@@ -1,0 +1,116 @@
+[
+    {
+    "name": "Heahmund",
+    "season": "S2",
+    "specialty": ["Pikeman", "PvP", "Counterattack"],
+    "talents": [
+        {
+        "name": "Hold Fast",
+        "type": "Passive",
+        "description": "When deployed Troop counterattacks, there is a 15% chance to grant them a shield (Shield Factor 600) for 2s. Triggers up to 1 time every 4s."
+        },
+        {
+        "name": "Spear of Honor",
+        "type": "Passive",
+        "description": "Increases deployed Pikemen’s Attack by 10%."
+        },
+        {
+        "name": "Tit for Tat",
+        "type": "Counterattack",
+        "description": "When deployed Troop receives Active Skill Damage, deals 1 instance of direct damage (Damage Factor 500) to the target Troop. If your own Troop does not have a shield, they take 30% less damage for 1s. Triggers up to 1 time every 1s."
+        },
+        {
+        "name": "Absolute Defense",
+        "type": "Passive",
+        "description": "Increases deployed Pikemen’s Defense by 10%."
+        },
+        {
+        "name": "Purifying Water",
+        "type": "Passive",
+        "description": "Increases deployed Pikemen’s Health by 10%."
+        },
+        {
+        "name": "Determined Defense",
+        "type": "Counterattack",
+        "description": "When deployed Troop receives a basic attack, there is a 20% chance to deal 1 instance of direct damage (Damage Factor 300) to the target Troop, and heal your own Troop (Heal Factor 300). If your own Troop has a shield, the target Troop also takes the damage."
+        }
+    ],
+    "skills": [
+        {
+        "name": "Authoritative Suppression",
+        "type": "Active",
+        "rage": 1000,
+        "level": 10,
+        "description": "Deals 1 instance of direct damage (Damage Factor 1325) to the target Troop, and heals own Troop (Heal Factor 310).",
+        "awakening": {
+            "name": "Vanquishing Blade",
+            "description": "Deals 1 instance of direct damage (Damage Factor 1700) to the target Troop, heals own Troop (Heal Factor 400), and reduces damage taken by 10% for 2s."
+        }
+        },
+        {
+        "name": "Zeal",
+        "type": "Counterattack",
+        "level": 10,
+        "probability": "100%",
+        "description": "When deployed Troop receives healing, there is a 20% chance to deal 1 instance of direct damage (Damage Factor 750) to the target Troop, and a 20% chance to randomly Purify 1 debuff from your own Troop. Triggers up to 1 time every 3s."
+        }
+    ]
+    },
+    {
+    "name": "Freydis Eriksdotter",
+    "season": "S1",
+    "specialty": ["Archer", "PvP", "Skills"],
+    "talents": [
+        {
+        "name": "Heroic Blessing",
+        "type": "Passive",
+        "description": "Triggers when entering battle, reduces deployed Troop’s Counterattack Damage by 30% for 30s. After 30s, increases their Burn Damage by 15%. This Buff cannot be removed and will last until the end of the battle."
+        },
+        {
+        "name": "Meteor Arrow",
+        "type": "Command",
+        "description": "Increases deployed Archers’ Attack by 10%."
+        },
+        {
+        "name": "Battle Hymn",
+        "type": "Passive",
+        "description": "Deals 1 instance of direct damage (Damage Factor 800) to the target every 9s. When your deployed Troops’ Rage is lower than the target, they restore 50 Rage."
+        },
+        {
+        "name": "Sturdy Bow",
+        "type": "Passive",
+        "description": "Increases deployed Archers’ Defense by 10%."
+        },
+        {
+        "name": "Ullr’s Blessing",
+        "type": "Passive",
+        "description": "Increases deployed Archers’ Health by 10%."
+        },
+        {
+        "name": "Flame’s Judgment",
+        "type": "Passive",
+        "description": "If the target is Burning, there is a 30% chance for deployed Troops to deal direct damage 1 time (Damage Factor 1000) to the target when triggering a Command Skill."
+        }
+    ],
+    "skills": [
+        {
+        "name": "Flame Slash",
+        "type": "Active",
+        "rage": 1000,
+        "level": 10,
+        "description": "Deals 1 instance of direct damage to the target (Damage Factor 560) and inflicts them with Burn. Burning enemies will take continuous damage every second (Damage Factor 245) for 4s.",
+        "awakening": {
+            "name": "Desperate Strike",
+            "description": "Deals 1 instance of direct damage (Damage Factor 800) to the target and inflicts them with Burning. Burning enemies will take continuous damage every second (Damage Factor 350) for 4s."
+        }
+        },
+        {
+        "name": "Blade’s Judgment",
+        "type": "Command",
+        "level": 10,
+        "probability": "100%",
+        "description": "Deals 1 instance of direct damage to the target every 9s (Damage Factor 240) and inflicts them with Burn. Burning enemies will take continuous damage every second (Damage Factor 240) for 3s."
+        }
+    ]
+    }
+]

@@ -1,0 +1,6 @@
+{
+  "mount_type": "infantry",
+  "_defaults": { "level": 10, "star_level": 5 },
+  "slot1": [],
+  "slot2": []
+}
