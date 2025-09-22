@@ -1,0 +1,58 @@
+# app/features/events/router.py
+from __future__ import annotations
+from aiogram import Router, types, F
+from aiogram.filters import Command
+
+from . import repo
+from .keyboard import kb_events, kb_event_details
+from app.common.callbacks import EventCb
+from app.common.render import event_card, rules_block
+
+router = Router(name="events")
+
+@router.message(Command("events"))
+async def cmd_events(m: types.Message):
+    parts = m.text.split(maxsplit=1)
+
+    # без запроса — показать список
+    if len(parts) == 1:
+        names = [e.name for e in repo.list_events()]
+        if not names:
+            return await m.answer("No events yet.")
+        return await m.answer("Select an event:", reply_markup=kb_events(names, page=0))
+
+    # с запросом — искать
+    q = parts[1].strip()
+    hits = repo.search(q)
+    if not hits:
+        return await m.answer("No matches found.")
+    names = [e.name for e in hits][:30]
+    await m.answer(f"Found {len(hits)} match(es). Select:", reply_markup=kb_events(names, page=0))
+
+@router.callback_query(EventCb.filter(F.action == "page"))
+async def cb_page(q: types.CallbackQuery, callback_data: EventCb):
+    page = callback_data.page or 0
+    names = [e.name for e in repo.list_events()]
+    await q.message.edit_reply_markup(reply_markup=kb_events(names, page=page))
+    await q.answer()
+
+@router.callback_query(EventCb.filter(F.action == "view"))
+async def cb_view(q: types.CallbackQuery, callback_data: EventCb):
+    key = (callback_data.id or "").strip()
+    ev = repo.get_by_name(key) or repo.get_by_id(key)
+    if not ev:
+        return await q.answer("Not found", show_alert=True)
+    await q.message.answer(
+        event_card(ev),
+        reply_markup=kb_event_details(ev.id, ev.has_rules)
+    )
+    await q.answer()
+
+@router.callback_query(EventCb.filter(F.action == "rules"))
+async def cb_rules(q: types.CallbackQuery, callback_data: EventCb):
+    ev_id = (callback_data.id or "").strip()
+    ev = repo.get_by_id(ev_id)
+    if not ev:
+        return await q.answer("Not found", show_alert=True)
+    await q.message.answer(rules_block(ev.name, ev.rules_text or "—"))
+    await q.answer()
